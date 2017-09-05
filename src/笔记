@@ -1,0 +1,13 @@
+Tomcat启动
+1.如果想要在命令行中直接输入startup.bat启动服务器，需要配置CATALINA_HOME和JAVA_HOME两个环境变量
+执行startup.bat命令以后，会先检查CATALINA_HOME这个环境变量，然后执行这个环境变量下的
+catAlina.bat命令，在这个命令中调用了setclasspath.bat命令，在这个命令中会去检查JAVA_HOME是否配置
+
+2.如果重复启动一个tomcat,会报错，想要查看报错信息，用catalina run命令来启动tomcat,可以看到下面的错误提示
+java.net.BindException: Address already in use: JVM_Bind
+
+catalina start:在新的窗口启动服务器 catalina stop 关闭新窗口启动的服务器
+catalina run：在当前窗口启动服务器，启动以后通过ctrl+C可以关闭服务器
+
+<role rolename="manager-gui"/>
+<user username="lxn" password="lxn" roles="manager-gui"/>
