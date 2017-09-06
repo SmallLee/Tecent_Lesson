@@ -28,6 +28,6 @@ public class Person {
     }
 
     public String getPersonInfo(){
-        return  "info";
+        return  "inf22o";
     }
 }

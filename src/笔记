@@ -15,3 +15,25 @@ catalina run：在当前窗口启动服务器，启动以后通过ctrl+C可以�
 
 手动编写web应用放到tomcat目录下，运行时报错
 Only a type can be imported. tencent.Person resolves to a package
+
+3.创建项目找不到Servlet类的解决办法，File-Project Structure,点击+号，选择jars or directies,
+选择tomcat目录里lib下的servlet-api.jar
+
+4.创建一个类，实现Servlet类，并实现对应的方法，
+配置
+ <!--配置和映射Servlet-->
+    <servlet>
+        //Servlet注册的名字
+        <servlet-name>HelloServlet</servlet-name>
+        <servlet-class>tencent.HelloServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        //需要和Servlet文本节点的名称一样
+        <servlet-name>HelloServlet</servlet-name>
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+HelloServlet constructor
+init
+service
+
+destory
