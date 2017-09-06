@@ -11,3 +11,7 @@ catalina run：在当前窗口启动服务器，启动以后通过ctrl+C可以�
 
 <role rolename="manager-gui"/>
 <user username="lxn" password="lxn" roles="manager-gui"/>
+
+
+手动编写web应用放到tomcat目录下，运行时报错
+Only a type can be imported. tencent.Person resolves to a package
