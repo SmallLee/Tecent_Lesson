@@ -42,3 +42,8 @@ destory:释放servlet占用的资源
 
 6.load-on-startup:制定servlet创建的时机，负数代表第一次请求的时候创建，0或证书代表当前web应用被Servlet容器加载的
 时候创建，数值越小优先级越高，也就是越早被创建
+
+一个servlet可以对应多个servlet-mapping
+7.url-pattern可以使用通配符*，只能用下面两种方式
+    a:*.后缀名
+    b:以/开头，以/*结尾，例如/action/*
