@@ -93,3 +93,12 @@ destory:释放servlet占用的资源
     getParameterNames
     getParameterValues：获取名称对应的数组
   通过子接口HttpServletRequest可以获得与HTTP请求有关的数据
+
+13.ServletResponse
+    getOutputStream
+    getWriter
+    子接口HttpServletResponse,重要方法sendRedirect
+
+14.继承HttpServlet重写init(ServletConfig config)方法的时候，要调用super.init，否则会报空指针异常
+不建议重写带参数的init方法，容易报空指针异常
+建议重写init()方法
