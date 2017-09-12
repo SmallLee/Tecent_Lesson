@@ -47,3 +47,43 @@ destory:释放servlet占用的资源
 7.url-pattern可以使用通配符*，只能用下面两种方式
     a:*.后缀名
     b:以/开头，以/*结尾，例如/action/*
+
+8.配置任意路径下的web应用
+    在tomcat的conf\Catalina\localhost路径下新建一个xml文件，这里取名为helloworld.xml
+    内容如下
+    <Context path="/test" docBase = "D:\\helloworld" reloadable="true">
+    </Context>
+
+    path:Context的上下文路径，一个Servlet对应一个唯一的上下文路径，而这个名称只要唯一就行，至于是什么名称，没有限定。
+    docBase指定项目的真实存放路径
+    reloadable：如果设置为true，Tomcat服务器在运行时，会监视WEB-INF/classes和WEB-INF/lib目录下类的改变，如果发现有类被更新，
+    Tomcat服务器将自动重新加载该Web应用程序。这个特性在应用程序开发阶段非常有用，
+    但是它需要额外的运行时开销，所以在产品发布时不建议使用。该属性的默认值是false。
+9.ServletConfig
+    方法 getInitParameterNames
+    getServletName获得注册的Servlet的名字
+    getInitParameter
+    getServletContext
+
+10.HTTP请求和响应
+   请求结构：请求行，请求头，一个空行，试题内容
+   响应结构：状态行，消息头，一个空行，响应实体
+11.在浏览器地址输入某个url访问或者单击链接访问url，都是get请求，get请求的数据在1k以下
+    get请求把表单的字段和数据封装在请求实体中
+
+  客户端请求：
+  GET /hello.txt HTTP/1.1
+  User-Agent: curl/7.16.3 libcurl/7.16.3 OpenSSL/0.9.7l zlib/1.2.3
+  Host: www.example.com
+  Accept-Language: en, mi
+
+ 服务端响应：
+    HTTP/1.1 200 OK
+    Date: Mon, 27 Jul 2009 12:28:53 GMT
+    Server: Apache
+    Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT
+    ETag: "34aa387-d-1568eb00"
+    Accept-Ranges: bytes
+    Content-Length: 51
+    Vary: Accept-Encoding
+    Content-Type: text/plain
