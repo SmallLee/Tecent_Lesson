@@ -87,3 +87,9 @@ destory:释放servlet占用的资源
     Content-Length: 51
     Vary: Accept-Encoding
     Content-Type: text/plain
+12.ServletRequest
+    getParameter:若参数有多个值，只能获得第一个
+    getParameterMap
+    getParameterNames
+    getParameterValues：获取名称对应的数组
+  通过子接口HttpServletRequest可以获得与HTTP请求有关的数据
