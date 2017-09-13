@@ -102,3 +102,21 @@ destory:释放servlet占用的资源
 14.继承HttpServlet重写init(ServletConfig config)方法的时候，要调用super.init，否则会报空指针异常
 不建议重写带参数的init方法，容易报空指针异常
 建议重写init()方法
+
+15.JSP
+jsp文件可以放置在除了WEB-INF及其子目录之外的任何目录
+
+16.JSP内置对象
+    request:HttpServletRequest的对象
+    response
+    pageContext:上下文对象，可以获取其他内置对象，以及获取页面的信息
+    session:
+    application:代表当前web应用，ServletContext对象
+    config:代表ServletConfig对象，可以获取配置参数，需要把jsp指定为servlet，在web.xml中通过jsp-file指定
+    out:JSPWriter对象
+    page:指向当前JSP对应的Servlet的引用
+
+17.JSP脚本片段：嵌套在<%%>之间的java代码
+   JSP声明：<%!%>被声明的方法，被插入到_jspService方法之外
+
+
