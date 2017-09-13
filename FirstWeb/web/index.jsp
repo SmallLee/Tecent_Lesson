@@ -14,6 +14,8 @@
           <%
             Person p = new Person();
             System.out.println(p.getPersonInfo());
+            out.print("abcd");
+            out.println("1234");
           %>
   </body>
 </html>
