@@ -1,0 +1,14 @@
+<%@ page import="java.util.Date" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+    <%
+        Date date = new Date();
+    %>
+    <%=session.getId()%>
+</body>
+</html>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>

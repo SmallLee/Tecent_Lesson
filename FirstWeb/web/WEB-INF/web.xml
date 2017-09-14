@@ -21,4 +21,8 @@
         <param-name>password</param-name>
         <param-value>123456</param-value>
     </context-param>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/error.jsp</location>
+    </error-page>
 </web-app>

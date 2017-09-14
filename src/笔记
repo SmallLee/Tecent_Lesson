@@ -119,4 +119,32 @@ jsp文件可以放置在除了WEB-INF及其子目录之外的任何目录
 17.JSP脚本片段：嵌套在<%%>之间的java代码
    JSP声明：<%!%>被声明的方法，被插入到_jspService方法之外
 
+18.对象的作用域
+pageContext:仅在当前页面
+request:一次请求(在有转发的情况下可以跨页面获取值)
+session:一次会话
+application:整个应用
 
+19.请求的转发和重定向
+    本质区别：转发是一次请求，重定向是两次
+   a:地址栏不一样
+   b:request对象不一样
+   c:转发只能转发当前WEB应用的资源，重定向可以定向到任何资源
+   d:转发：/代表当前web应用的根目录
+   重定向：/代表当前web站点的根目录
+ 20.JSP页面指令
+  page
+  include
+  taglib
+  对TOMCAT而言，WEB-INF下面的文件不能在浏览器中访问，但可以通过转发访问
+
+  contentType:指定JSP页面的响应类型
+
+  21.在web.xml中配置错误页面
+  <error-page>
+          <error-code>500</error-code>
+          <location>/WEB-INF/error.jsp</location>
+            <exception-type>错误类型</exception-type>
+      </error-page>
+
+charset指定响应的页面的编码，pageEncoding指定当前JSP页面的编码，通常两者一致
