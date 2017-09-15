@@ -134,7 +134,8 @@ application:整个应用
    重定向：/代表当前web站点的根目录
  20.JSP页面指令
   page
-  include
+  include(包含的两个页面的编码要一致，否则会报错)
+  Page directive: illegal to have multiple occurrences of contentType with different values
   taglib
   对TOMCAT而言，WEB-INF下面的文件不能在浏览器中访问，但可以通过转发访问
 
@@ -148,3 +149,30 @@ application:整个应用
       </error-page>
 
 charset指定响应的页面的编码，pageEncoding指定当前JSP页面的编码，通常两者一致
+
+22.以斜杠开头，表示web应用的根目录，否则，相对于当前文件
+
+23.动态包含和静态包含的区别
+    静态包含：把被包含页面中除了编译指令之外的代码都包含进来到当前页面的body元素之内，生成一个Servlet文件
+    动态包含：通过命令包含
+    org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "a.jsp", out, false);
+    生成两个Servlet文件
+23.jsp:forward等同于request.getRequestDispatcher("a.jsp").forward(request,response);
+区别是jsp:forward可以通过jsp:param传递参数(jsp:include也可以传递参数)
+
+24.乱码问题
+    请求页面显示中文：contentType="text/html;charset=UTF-8"和pageEncoding的值一致，通常建议是UTF-8
+    获取中文参数：（默认是ISO-8859-1传递的）
+        a:对于post请求，在获取参数之前调用request.setCharacterEncoding
+        b：对于get请求
+            可以使用下面的两种方式
+            (1)byte[] value = request.getParameter("username").getBytes("ISO-8859-1");
+            String str = new String(value,"UTF-8");
+            (2)request.setCharacterEncoding，并且在tomcat的server.xml文件中加入useBodyEncodingForURI参数
+             <Connector port="8080" protocol="HTTP/1.1"
+                           connectionTimeout="20000"
+                           redirectPort="8443" useBodyEncodingForURI="true"/>
+             意思是采用body的编码方式
+
+25.在JSP页面获取参数强转的时候，要用包装类型
+boolean success = (Boolean) request.getAttribute("success");

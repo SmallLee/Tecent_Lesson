@@ -11,6 +11,7 @@
     <title>错误页面</title>
 </head>
 <body>
+    <%=exception.getMessage()%>
     这是错误信息页面
 </body>
 </html>
