@@ -176,3 +176,5 @@ charset指定响应的页面的编码，pageEncoding指定当前JSP页面的编�
 
 25.在JSP页面获取参数强转的时候，要用包装类型
 boolean success = (Boolean) request.getAttribute("success");
+
+26.
