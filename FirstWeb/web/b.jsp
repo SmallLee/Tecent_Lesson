@@ -5,7 +5,7 @@
   Time: 16:09
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" session="false" %>
 <html>
 <head>
     <title>Title</title>
@@ -28,5 +28,6 @@
     <%--%>--%>
     <%--<%=str.toString()%>--%>
     <%=request.getParameter("username")%>
+    <%=request.getSession(false)%>
 </body>
 </html>

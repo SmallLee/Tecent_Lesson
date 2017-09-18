@@ -31,4 +31,25 @@
     <a href="<%=request.getContextPath()%>/cookie/read.jsp">和
     <a href="cookie/read.jsp">效果一样
 
+7.Session
+    session通过sessionId区分不同的客户，session是以cookie或者url重写为基础的，默认使用Cookie实现，
+    系统会使用一个JSESSIONID的Cookie,称之为session cookie,以区别persistent cookie
+    session cookie是存储在内存中的
+8.HttpSession生命周期
+    a:什么时候不会新创建session对象？
+        (1)当前资源是第一次访问，并且jsp的page指定的session为false
+        (2)不是第一个资源，并且其他页面已经创建了session对象，则服务器不会为当前jsp页面创建session对象
+        ，而是会把与当前会话关联的那个session对象返回来
+    对于Servlet:若servlet是客户端访问的第一个资源，则只有调用了request.getSession或者request.getSession(true)时才创建
+
+   Servlet中如何获取session
+    request.getSession()
+    b:什么时候销毁session
+        调用session的invalidate
+        服务器卸载了当前web应用
+        超过了session的过期时间,session.setMaxInactiveInterval可以设置session的有效时间
+        在web.xml中也可以设置session过期时间，单位分钟
+
+9.在Cookie禁用的情况下，如何跟踪session
+    通过URL重写
 
