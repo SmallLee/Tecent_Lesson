@@ -12,3 +12,23 @@
   cookie.getMaxAge:获取最大时效
 
 3.Cookie只对一个客户端有效，用其他浏览器访问时，第一次还是没有Cookie
+
+4.删除Cookie
+            tempCookie.setMaxAge(0);
+           response.addCookie(tempCookie)
+5.Cookie的作用范围
+    当前目录和当前目录的子目录，但不能作用域当前目录的上一级目录
+    可以通过cookie.setPath设置Cookie作用范围
+    cookie.setPath("/")其中斜杠代表根目录，意思就是说根目录下的cookie是可见的
+
+6.对Tomcat而言
+    request.getScheme  http
+    request.getServerName()---localhost
+    request.getServerPort()---8080
+
+    request.getContextPath是为了解决相对路径的问题，可返回站点的根路径
+    如果当前文件在根路径下，则
+    <a href="<%=request.getContextPath()%>/cookie/read.jsp">和
+    <a href="cookie/read.jsp">效果一样
+
+
