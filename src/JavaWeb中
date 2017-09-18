@@ -1,0 +1,14 @@
+1.Cookie
+    a：创建Cookie对象
+    b:设置Cookie时效(默认情况下是会话级别的Cookie,存储在浏览器的内存中，用户退出浏览器后被删除，若
+    希望存储在磁盘上，则需要设置maxAge,单位是秒，最大时效设置为0是命令浏览器删除cookie,负数表示cookie永远不会被存储)
+    c：添加到响应头
+
+2.request.getCookies()//从请求中获取Cookie
+  cookie.getName//获取cookie名字
+  cookie.getValue//获取cookie的值
+  cookie.setMaxAge//设置Cookie最大时效
+  response.addCookie//添加cookie
+  cookie.getMaxAge:获取最大时效
+
+3.Cookie只对一个客户端有效，用其他浏览器访问时，第一次还是没有Cookie
