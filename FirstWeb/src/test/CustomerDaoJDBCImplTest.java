@@ -46,7 +46,7 @@ public void testGetAll() throws Exception {
 @Test
 public void testSave() throws Exception { 
 //TODO: Test goes here...
-    Customer customer = new Customer("nihao","Œ‰∫∫","99999");
+    Customer customer = new Customer("wangwu","Œ‰∫∫","99999");
     customerDao.save(customer);
 } 
 
@@ -80,7 +80,7 @@ public void testDelete() throws Exception {
 @Test
 public void testGetCountByName() throws Exception { 
 //TODO: Test goes here...
-    long count = customerDao.getCountByName("zhangsan");
+    long count = customerDao.getCountByName("nihao");
     System.out.println(count);
 }
 }
