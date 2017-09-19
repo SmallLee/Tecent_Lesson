@@ -1,5 +1,6 @@
 package test;
 
+import dao.CriteriaCustomer;
 import dao.Customer;
 import dao.CustomerDao;
 import impl.CustomerDaoJDBCImpl;
@@ -82,5 +83,14 @@ public void testGetCountByName() throws Exception {
 //TODO: Test goes here...
     long count = customerDao.getCountByName("nihao");
     System.out.println(count);
+}
+@Test
+    public void testGetCustomerByCriteria(){
+        CriteriaCustomer cc = new CriteriaCustomer();
+        cc.name="a";
+        cc.address=null;
+        cc.phone=null;
+    List<Customer> customerList = customerDao.getCustomerByCriteria(cc);
+    System.out.println(customerList);
 }
 }

@@ -224,3 +224,20 @@ boolean success = (Boolean) request.getAttribute("success");
   getClass().getGenericSuperclass()//通过反射获取当前类表示的实体类的直接父类的Type
 
   通过C3P0查询数据库需要给实体类提供set方法
+
+  33.多个请求对应一个Servlet
+        通过servlet的后缀名把多个请求映射到一个servlet
+        通过request.getServletPath获取不同的映射
+        截取出方法名，通过反射调用方法
+
+  34.表格样式
+  单元格内容居中
+    <style>
+            td{
+                text-align: center;
+            }
+        </style>
+        表格边框宽度为1，边框间距为1，
+   <table border="1" cellpadding="10" cellspacing="0">
+
+ 35.被Test注解的单元测试方法不能有输入参数，并且必须是public void的

@@ -1,22 +1,22 @@
 package dao;
 
-public class Customer {
+public class CriteriaCustomer {
     public int id;
     public String name;
     public String address;
     public String phone;
 
-    public Customer(){
+    public CriteriaCustomer(){
 
     }
 
-    public Customer(int id, String name, String address, String phone) {
+    public CriteriaCustomer(int id, String name, String address, String phone) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.phone = phone;
     }
-    public Customer( String name, String address, String phone) {
+    public CriteriaCustomer( String name, String address, String phone) {
         this.name = name;
         this.address = address;
         this.phone = phone;
@@ -28,21 +28,6 @@ public class Customer {
         this.id = id;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name == null ? "": "%"+name+"%";
-    }
-
-    public String getAddress() {
-        return address == null ? "": "%"+address+"%";
-    }
-
-    public String getPhone() {
-        return phone == null ? "": "%"+phone+"%";
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -57,6 +42,18 @@ public class Customer {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getName() {
+        return name == null ? "%%": "%"+name+"%";
+    }
+
+    public String getAddress() {
+        return address == null ? "%%": "%"+address+"%";
+    }
+
+    public String getPhone() {
+        return phone == null ? "%%": "%"+phone+"%";
     }
 
     @Override

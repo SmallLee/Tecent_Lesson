@@ -35,16 +35,17 @@ public class Dao<T> {
         }
     }
 
-    public void update(String sql,String...args) {
+    public int update(String sql,String...args) {
         Connection connection = null;
         try {
             connection = JdbcUtil.getConnection();
-            queryRunner.update(connection,sql,args);
+            return queryRunner.update(connection,sql,args);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             JdbcUtil.releaseConnection(connection);
         }
+        return 0;
     }
 
     /**

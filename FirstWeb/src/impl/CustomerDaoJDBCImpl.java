@@ -1,5 +1,6 @@
 package impl;
 
+import dao.CriteriaCustomer;
 import dao.Customer;
 import dao.CustomerDao;
 import dao.Dao;
@@ -7,6 +8,12 @@ import dao.Dao;
 import java.util.List;
 
 public class CustomerDaoJDBCImpl extends Dao<Customer> implements CustomerDao {
+    @Override
+    public List<Customer> getCustomerByCriteria(CriteriaCustomer cc) {
+        String sql = "select * from customer where name LIKE ? AND address LIKE ? AND phone LIKE ?";
+        return getForList(sql,cc.getName(),cc.getAddress(),cc.getPhone());
+    }
+
     @Override
     public List<Customer> getAll() {
         String sql = "select * from customer";
@@ -26,9 +33,9 @@ public class CustomerDaoJDBCImpl extends Dao<Customer> implements CustomerDao {
     }
 
     @Override
-    public void delete(int id) {
+    public int delete(int id) {
         String sql = "delete from customer where id = ?";
-        update(sql,id+"");
+        return update(sql,id+"");
     }
 
     @Override
