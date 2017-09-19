@@ -34,7 +34,21 @@ public class CustomerServlet extends HttpServlet {
         }
     }
     private void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        String name = req.getParameter("name");
+        String address = req.getParameter("address");
+        String phone = req.getParameter("phone");
+        int count = (int) customerDao.getCountByName(name);
+        if (count > 0 ) {
+            req.setCharacterEncoding("UTF-8");
+            req.setAttribute("msg","用户名"+name+"已经存在，请重新选择!");
+            System.out.println(req.getAttribute("msg"));
+            req.getRequestDispatcher("/customer/add.jsp").forward(req,resp);
+        } else {
+            Customer customer = new Customer(name,address,phone);
+            customerDao.save(customer);
+            resp.sendRedirect("/customer/success.jsp");//避免表单重复提交
+//            req.getRequestDispatcher("/customer/success.jsp").forward(req,resp);
+        }
     }
     private void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idStr = req.getParameter("id");

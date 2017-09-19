@@ -21,9 +21,9 @@ public class CustomerDaoJDBCImpl extends Dao<Customer> implements CustomerDao {
     }
 
     @Override
-    public void save(Customer customer) {
+    public int save(Customer customer) {
         String sql = "insert into customer(name,address,phone) values (?,?,?);";
-        update(sql,customer.name,customer.address,customer.phone);
+        return update(sql,customer.name,customer.address,customer.phone);
     }
 
     @Override

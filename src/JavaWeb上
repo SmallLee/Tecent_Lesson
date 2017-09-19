@@ -241,3 +241,5 @@ boolean success = (Boolean) request.getAttribute("success");
    <table border="1" cellpadding="10" cellspacing="0">
 
  35.被Test注解的单元测试方法不能有输入参数，并且必须是public void的
+
+ 36.使用重定向可以避免表单的重复提交
