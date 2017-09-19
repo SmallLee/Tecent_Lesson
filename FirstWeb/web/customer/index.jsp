@@ -15,6 +15,17 @@
             text-align: center;
         }
     </style>
+    <script src="../scripts/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" >
+       $(function(){
+           $(".delete").click(function () {
+               var content = $(this).parent().parent().find("td:eq(1)").text();
+               var msg = "确定要删除"+ content+"的信息吗?";
+              var flag = confirm(msg)
+              return flag;
+          }) ;
+       });
+    </script>
 </head>
 <body>
 <form action="/query.do" method="post">
@@ -33,7 +44,7 @@
     </tr>
     <tr>
         <td><input type="submit" value="Query"></td>
-        <td><a href="">Add New Customer</a></td>
+        <td><a href="/customer/add.jsp">Add New Customer</a></td>
     </tr>
     </table>
     <br><br>
@@ -56,7 +67,7 @@
                     <td><%=customer.address%></td>
                     <td><%=customer.phone%></td>
                     <td><a href="/update.dp?id=<%=customer.id%>">UPDATE</a></td>
-                    <td><a href="/delete.do?id=<%=customer.id%>">DELETE</a></td>
+                    <td><a class="delete" href="/delete.do?id=<%=customer.id%>">DELETE</a></td>
                 </tr>
             <%}
             }

@@ -34,7 +34,7 @@ public class CustomerServlet extends HttpServlet {
         }
     }
     private void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("add");
+
     }
     private void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idStr = req.getParameter("id");
