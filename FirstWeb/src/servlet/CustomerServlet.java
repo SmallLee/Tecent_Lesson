@@ -39,7 +39,6 @@ public class CustomerServlet extends HttpServlet {
         String phone = req.getParameter("phone");
         int count = (int) customerDao.getCountByName(name);
         if (count > 0 ) {
-            req.setCharacterEncoding("UTF-8");
             req.setAttribute("msg","用户名"+name+"已经存在，请重新选择!");
             System.out.println(req.getAttribute("msg"));
             req.getRequestDispatcher("/customer/add.jsp").forward(req,resp);
@@ -61,7 +60,26 @@ public class CustomerServlet extends HttpServlet {
         resp.sendRedirect("/query.do");
     }
     private void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        String idStr = req.getParameter("id");
+        String name = req.getParameter("name");
+        String address = req.getParameter("address");
+        String phone = req.getParameter("phone");
+        String oldName = req.getParameter("oldName");
+        int count = (int) customerDao.getCountByName(name);
+        String redirectPath = "/query.do";
+        try {
+            int id = Integer.parseInt(idStr);
+            if (!oldName.equalsIgnoreCase(name) && count > 0) {//数据库中有相同的记录
+                req.setAttribute("msg","The name "+name+" is already exists,please select another!");
+                req.getRequestDispatcher("/customer/update.jsp").forward(req,resp);
+                return;
+            }
+            Customer customer = new Customer(id,name,address,phone);
+            customerDao.update(customer);
+        } catch (Exception e){
+            redirectPath = "/cusomter/error.jsp";
+        }
+        resp.sendRedirect(redirectPath);
     }
     private void query(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //获取模糊查询的参数
@@ -73,5 +91,17 @@ public class CustomerServlet extends HttpServlet {
         List<Customer> customerList = customerDao.getCustomerByCriteria(cc);
         req.setAttribute("customerList",customerList);
         req.getRequestDispatcher("/customer/index.jsp").forward(req,resp);
+    }
+    private void edit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       String forwardpath = "/customer/error.jsp";
+        String idStr = req.getParameter("id");
+        try{
+            Customer customer = customerDao.get(Integer.parseInt(idStr));
+            if (customer != null) {
+                forwardpath = "/customer/update.jsp";
+                req.setAttribute("customer",customer);
+            }
+        } catch(Exception e){}
+        req.getRequestDispatcher(forwardpath).forward(req,resp);
     }
 }

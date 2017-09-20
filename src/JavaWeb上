@@ -243,3 +243,19 @@ boolean success = (Boolean) request.getAttribute("success");
  35.被Test注解的单元测试方法不能有输入参数，并且必须是public void的
 
  36.使用重定向可以避免表单的重复提交
+
+ 37.MVC案例DAO层设计
+      BaseDao:封装了基本的CRUD方法，以供子类继承使用,通过JdbcUtil连接数据库
+      CustomerDao：规定了相关的操作
+      CustomerDaoJDBCImpl：继承BaseDao实现CustomerDao接口，在实现的接口方法中调用BaseDao中的方法来实现功能
+      Dao层和Service层的设计
+      http://www.cnblogs.com/mingziday/p/4663233.html
+
+  38.getClass().getGenericSuperclass()//通过反射获取当前类表示的实体（类，接口，基本类型或void）的直接父类的Type
+    getActualTypeArguments//返回泛型参数数组
+    DButils中查询
+        一个实体类：BeanHandler
+        实体类集合：BeanListHandler
+        某个字段的值：ScalarHandler
+
+    39.隐藏域也能提交表单，只是在页面上看不见

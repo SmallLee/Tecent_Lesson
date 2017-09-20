@@ -3,11 +3,11 @@ package impl;
 import dao.CriteriaCustomer;
 import dao.Customer;
 import dao.CustomerDao;
-import dao.Dao;
+import dao.BaseDao;
 
 import java.util.List;
 
-public class CustomerDaoJDBCImpl extends Dao<Customer> implements CustomerDao {
+public class CustomerDaoJDBCImpl extends BaseDao<Customer> implements CustomerDao {
     @Override
     public List<Customer> getCustomerByCriteria(CriteriaCustomer cc) {
         String sql = "select * from customer where name LIKE ? AND address LIKE ? AND phone LIKE ?";
@@ -42,5 +42,11 @@ public class CustomerDaoJDBCImpl extends Dao<Customer> implements CustomerDao {
     public long getCountByName(String name) {
         String sql = "select count(*) from customer where name = ?";
         return getForValue(sql,name);
+    }
+
+    @Override
+    public int update(Customer customer) {
+        String sql = "update customer set name = ?,address=?,phone =? where id = ?";
+        return update(sql,customer.name,customer.phone,customer.phone,customer.id+"");
     }
 }

@@ -66,7 +66,7 @@
                     <td><%=customer.name%></td>
                     <td><%=customer.address%></td>
                     <td><%=customer.phone%></td>
-                    <td><a href="/update.dp?id=<%=customer.id%>">UPDATE</a></td>
+                    <td><a href="/edit.do?id=<%=customer.id%>">UPDATE</a></td>
                     <td><a class="delete" href="/delete.do?id=<%=customer.id%>">DELETE</a></td>
                 </tr>
             <%}

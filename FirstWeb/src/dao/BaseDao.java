@@ -14,18 +14,20 @@ import java.sql.SQLException;
 import java.util.List;
 
 /*
-* 封装了基本的CRUD方法，以供子类继承使用
-* 当前DAO直接在方法中获取数据库连接
+* 封装了基本的CRUD方法，以供子类继承使用，通过JdbcUtil连接数据库
 * */
-public class Dao<T> {
+public class BaseDao<T> {
     private QueryRunner queryRunner = new QueryRunner();
     private Class<T> clazz;
 
 
-    public Dao(){
+    public BaseDao(){
+        //通过反射获取当前类表示的实体（类，接口，基本类型或void）的直接父类的Type
         Type type = getClass().getGenericSuperclass();
+        System.out.println("type:---------"+type);
         if (type instanceof ParameterizedType) {
             ParameterizedType pt = (ParameterizedType) type;
+            //返回泛型参数数组
             Type[] typeArguments = pt.getActualTypeArguments();
             if (typeArguments != null && typeArguments.length > 0) {
                 if (typeArguments[0] instanceof Class) {

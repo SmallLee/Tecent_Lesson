@@ -44,6 +44,6 @@
             <td><input type="submit" value="Add"></td>
         </tr>
     </table>
-
+</form>
 </body>
 </html>
