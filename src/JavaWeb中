@@ -53,3 +53,8 @@
 9.在Cookie禁用的情况下，如何跟踪session
     通过URL重写
 
+10.Session简易购物车
+    当表单中有多选按钮，如果都不选，提交时，没有请求体信息,checkbox的name属性要相同
+    request.setAttribute只在一个request内有效，如果重定向客户端，将取不到值。
+    request.getSession().setAttribute可以通过sessionId得到自己的session，将参数
+    存储到session中，即使重定向页面，也不会丢失
