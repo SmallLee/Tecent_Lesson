@@ -58,3 +58,21 @@
     request.setAttribute只在一个request内有效，如果重定向客户端，将取不到值。
     request.getSession().setAttribute可以通过sessionId得到自己的session，将参数
     存储到session中，即使重定向页面，也不会丢失
+11.绝对路径和相对路径
+    开发建议写绝对路径，写绝对路径肯定没问题，写相对路径可能有问题
+    在由Servlet转发到JSP页面时，此时浏览器地址栏上显示的是Servlet的路径，而若JSP页面的超链接
+    还是相对于该JSP页面的地址，则可能出现问题
+    比如从a.jsp到Servlet,Servlet转发到b.jsp,b和c都在根目录下path文件夹里面，若此时b跳c的链接地址写的是c.jsp，就出问题
+
+    编写绝对路径可以避免上面的问题
+
+    JavaWeb中的/代表什么
+        代表当前Web应用的根路径（/需要交给servlet处理）
+                a:请求转发
+                b：web.xml中配置的
+        代表当前站点的跟路径(浏览器处理)
+                a:超链接
+                b:表单中的action
+                c:请求重定向
+         如何编写绝对路径：若是相对于当前站点根路径：在再其前面加上contextPath
+         通过request或者application的getContextPath获得
