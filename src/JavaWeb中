@@ -76,3 +76,9 @@
                 c:请求重定向
          如何编写绝对路径：若是相对于当前站点根路径：在再其前面加上contextPath
          通过request或者application的getContextPath获得
+   12.表单的重复提交情况
+            a:表单提交到一个Servlet，Servlet转发到JSP页面，地址栏还保留这servlet的路径，这时候刷新页面
+            b:在响应页面没有到达时，重复点击提交
+            c:点击返回，再点提交
+      不算重复提交情况：
+        返回，刷新原来的页面，提交
