@@ -82,3 +82,46 @@
             c:点击返回，再点提交
       不算重复提交情况：
         返回，刷新原来的页面，提交
+
+        避免表单的重复提交：把标记放到session中
+        a:在原表单页面生成一个随机token
+        b：在原表单页面，把token放到session中
+        c:在原表单页面，把token值放到隐藏域中
+
+        d:在目标servlet中，获取session和隐藏域中的值
+        e:比较两个值是否一致，一致，把session中的值清除
+        f:不一致，响应重复提交
+
+
+    13.超链接点击发送的是get请求
+            request.setAttribute和需要结合转发获取数据
+
+    14.JSP内置对象out的print和write方法区别
+        a:out.print是JSPWriter的方法，out.write是弗雷Writer的方法
+        b:如果两个方法输入的内容为null时，print方法会输出null，write会报空指针异常
+        out.print(1)//输出1，因为prin方法直接将1转化为字符串1
+        out.write(1)//看不到输出，write方法是将转化为ASCII码表中的字符，而1-32在对应的字符在页面上显示
+        不出来
+
+    15.从request中获取的中文参数，要和固定的中文字符串比较是否相等的话，注意此时的编码，固定中文字符串的
+    编码是系统编码，只有编码的相同，才能比较值相等
+
+    16.调用response.getWrite().write方法向页面写入中文时，需要调用
+    resp.setContentType("text/html;charset=utf-8");
+
+    17.向控制台打印固定中文字符串时，可能乱码，需要做对应的处理，例如
+            resp.setContentType("text/html;charset=utf-8");
+            PrintWriter writer = resp.getWriter();
+            byte[] bytes = "重复提交".getBytes("gbk");
+            writer.println(new String(bytes,"utf-8"));
+            System.out.println(new String(bytes,"utf-8"));
+    18.session实现验证码
+        a:在原表单页面，生成一个验证码图片，并且把验证码放入session中
+        b:定义一个文本域，用于输入验证码内容
+
+        c:在目标Servlet中，获取session域的值和表单提交的值
+        d:比较两个值是否相等，相等，则受理请求，且把session中的内容清除
+        e:不一致，返回原页面，提示验证码不正确
+
+
+
