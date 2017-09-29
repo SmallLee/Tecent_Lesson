@@ -82,3 +82,23 @@
             c:点击返回，再点提交
       不算重复提交情况：
         返回，刷新原来的页面，提交
+
+   13.
+        <jsp:useBean id="person" class="dao.Person" scope="request"/>
+        上面代码的作用：
+        从scope中获取属性名为id的值，赋给class对应的实体，
+        如果获取的值为空，根据class类名通过反射创建一个新的对象，并且放入到scope的属性中，
+        属性名是id，属性值为创建的对象
+
+   使用jsp:setProperty时，如果property属性的值为*，则请求参数会赋值给对应的bean属性
+   例如下面的请求：
+   http://localhost:8080/useBean.jsp?age=10&name=lxn&address会分别给age,name.address赋值
+
+   14.sessionScope.person.name
+        相当于
+        Person person = session.getAttribute("person");
+        person.getName
+    15.
+    EL变量
+        ${usename}//从范围小的开始取，page,request,session,application
+    16.EL可以进行自动数据类型转化
