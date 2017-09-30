@@ -15,6 +15,7 @@
     <input type="text" name="name" value="${param.name}">
     <input type="submit">
 </form>
+<a href="index2.jsp?name=A&name=B&name=C">paramValues</a>
     <jsp:useBean id="person" class="dao.Person" scope="session"/>
     <jsp:setProperty name="person" property="age" value="10"/>
     <jsp:getProperty name="person" property="age"/>

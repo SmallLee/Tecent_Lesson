@@ -146,3 +146,7 @@
     EL变量
         ${usename}//从范围小的开始取，page,request,session,application
     16.EL可以进行自动数据类型转化
+
+    17.与输入有关的隐含对象
+    param
+    paramValues
