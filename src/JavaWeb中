@@ -205,3 +205,22 @@
            scriptless:标签体可以包含el表达式和jsp动作元素，不能包含jsp脚本元素
            tagdependent:标签体交由标签本身去处理，若指定tagdependent,则标签体中的内容会原封不动的交给
            标签处理类
+
+       21.带父标签的标签体
+            父标签无法获取子标签的引用，仅把子标签作为标签体使用
+            子标签通过getParent可以获得父标签的引用，如果当前标签有父标签，那么JSP引擎会通过
+            setParentTag把父标签的引用传递过来
+            父标签的类型是JspTag,空接口，用来统一SimpleTag和Tag
+            标签库API
+                JspTag
+                    ----SimpleTag(简单标签)
+                    ----Tag(传统标签)
+          在父标签的doTag中写getJspBody().invoke(null)的意思是让子标签能够得到执行，
+          如果不写的话，子标签是无效的
+
+            <atguigu:choose>
+                  <atguigu:when test="${param.age > 24}">大学毕业</atguigu:when>
+                  <atguigu:when test="${param.age > 20}">高中毕业</atguigu:when>
+                  <atguigu:otherwise>小学毕业</atguigu:otherwise>
+              </atguigu:choose>
+            
