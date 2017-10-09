@@ -3,6 +3,7 @@
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/FirstWeb/src/test/CustomerDaoJDBCImplTest.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/FirstWeb/src/test/JdbcUtilTest.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/FirstWeb/web/readFile.txt" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

@@ -150,3 +150,58 @@
     17.与输入有关的隐含对象
     param
     paramValues
+
+    18.自定义标签步骤
+        a:新建一个类实现SimpleTag接口，实现对应的方法
+        b:新建标签描述文件tld，建议放在WEB-INF下，
+        <?xml version="1.0" encoding="UTF-8"?>
+        <taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+                version="2.0">
+            <!--描述tld文件-->
+            <description>Mytag 1.1 functions library</description>
+            <display-name>Mytag functions sys</display-name>
+            <tlib-version>1.1</tlib-version>
+            <!--建议在jsp页面上使用的前缀-->
+            <short-name>atguigu</short-name>
+            <!--作为tld文件的id，唯一标识该文件，多个tld文件的url不能重复-->
+            <uri>http://www.atguigu.com</uri>
+            <!--描述自定义的HelloSimpleTag标签-->
+            <tag>
+                <!--标签名-->
+                <name>hello</name>
+                <!--标签处理类-->
+                <tag-class>tag.HelloSimpleTag</tag-class>
+                <!--标签体-->
+                <body-content>empty</body-content>
+            </tag>
+        </taglib>
+        c:在jsp页面通过taglib预编译指令引入tld文件
+        <%@taglib prefix="h" uri="http://www.atguigu.com"  %>
+        d:使用标签
+            <前缀：标签名>
+
+     19.带属性的标签
+            a:在标签处理类中定义属性对应的setter方法
+            b:在tld文件中对属性进行描述
+                 <attribute>
+                            <!--属性名-->
+                            <name>value</name>
+                            <!--属性是否是必须的,次标签要放在rtexprvalue之前，否则编译失败-->
+                            <required>true</required>
+                            <!--是否允许在运行时指定属性的值  runtime expression value-->
+                            <rtexprvalue>true</rtexprvalue>
+                        </attribute>
+            c:使用属性
+
+      20.带标签体的标签
+            若配置了标签带有标签体，那么jsp引擎会调用setJspBody方法，把标签体对应的JspFragment对象传递给标签
+            处理类，在SimpleTagSupport中还定义了一个getJspBody方法，用于返回JspFragment对象
+
+            JspFragment的invoke(Writer)方法，把标签体的内容输出到Writer中，若为null,则等同于getJspContext.getOut
+           <body-content>取值有三种：
+           empty：没有标签体
+           scriptless:标签体可以包含el表达式和jsp动作元素，不能包含jsp脚本元素
+           tagdependent:标签体交由标签本身去处理，若指定tagdependent,则标签体中的内容会原封不动的交给
+           标签处理类
