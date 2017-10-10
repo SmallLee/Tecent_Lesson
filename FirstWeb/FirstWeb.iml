@@ -48,5 +48,7 @@
     <orderEntry type="library" name="mchange-commons-0.2" level="project" />
     <orderEntry type="library" name="mchange-commons-java-0.2.12" level="project" />
     <orderEntry type="library" name="commons-dbutils-1.7" level="project" />
+    <orderEntry type="library" name="jstl" level="project" />
+    <orderEntry type="library" name="standard" level="project" />
   </component>
 </module>

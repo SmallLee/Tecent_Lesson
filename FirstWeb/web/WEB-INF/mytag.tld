@@ -119,4 +119,13 @@
         <tag-class>tag.OtherWiseTag</tag-class>
         <body-content>scriptless</body-content>
     </tag>
+    <!--描述el自定义函数-->
+    <function>
+        <!--函数名-->
+        <name>concat</name>
+        <!--函数对应的处理类-->
+        <function-class>el.MyElFunction</function-class>
+        <!--方法签名-->
+        <function-signature>java.lang.String concat(java.lang.String,java.lang.String)</function-signature>
+    </function>
 </taglib>

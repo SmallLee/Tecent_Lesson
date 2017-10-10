@@ -1,0 +1,37 @@
+1.使用el自定义函数，要导入jstl对应的jar包，有两个，jstl.jar和standard.jar，将这两个jar包放入到WEB-INF/lib下
+官方下载地址如下http://archive.apache.org/dist/jakarta/taglibs/standard/binaries/，
+然后在jsp页面中导入<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+2.编写el自定义函数的步骤
+    a:写一个类，定义一个public的静态方法
+    b:在tld文件中进行描述
+    <!--描述el自定义函数-->
+        <function>
+            <!--函数名-->
+            <name>concat</name>
+            <!--函数对应的处理类-->
+            <function-class>el.MyElFunction</function-class>
+            <!--方法签名-->
+            <function-signature>java.lang.String concat(java.lang.String,java.lang.String)</function-signature>
+        </function>
+    c:在jsp页面使用
+    <%@ taglib prefix="atguigu" uri="http://www.atguigu.com" %>
+      ${atguigu:concat("a","b" )}
+3.JSTL
+    使用jstl标签库，需要先导入两个jar包
+    然后在jsp页面中引入
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    标签
+        <c:out>用于输出变量，(比el更强大，可以对敏感的字符进行自动转换)
+        三个属性：
+            value:要输出的值
+            default:当value为null时，显示的值
+            escapeXml:是否对特殊字符转化，默认为true
+        <c:set> 用来将变量存储到JSP范围或者javabean的属性中
+        <c:remove> 根据变量名移除对应范围内的属性
+        <c:if>没有else，但是可以把判断的结果存储起来
+        <c:choose when otherwise 可以实现if else if的地址
+        c:choose必须以父标签存在
+        c:when和c:otherwise不能单独存在
+        c:otherwise必须放在c:when之后
+4.URL操作
+    <c:import>可以包含任何页面
