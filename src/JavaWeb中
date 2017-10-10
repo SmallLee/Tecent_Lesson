@@ -223,4 +223,4 @@
                   <atguigu:when test="${param.age > 20}">高中毕业</atguigu:when>
                   <atguigu:otherwise>小学毕业</atguigu:otherwise>
               </atguigu:choose>
-            
+
