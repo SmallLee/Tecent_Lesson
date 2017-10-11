@@ -35,3 +35,9 @@
         c:otherwise必须放在c:when之后
 4.URL操作
     <c:import>可以包含任何页面
+      <c:redirect url="/jstl/jstl.jsp"/>  斜杠代表的是当前Web应用的根目录
+      <c:url/> 产生一个url地址，可以根据cookie是否可用来智能进行url重写，对get请求的参数进行编码
+        可以把产生的url存储在域对象的属性中
+
+    数据库删除语句：delete from customer where name = 'xxx';
+    模糊查询：select * from customer where name like '%%';(查询所有的)

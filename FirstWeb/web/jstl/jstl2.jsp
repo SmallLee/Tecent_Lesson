@@ -44,6 +44,11 @@
     <%--URL操作--%>
     <c:import url="http://www.baidu.com"/>
     <%--重定向--%>
-    <%--<c:redirect url="jstl.jsp"/>--%>
+    <%--<c:redirect url="/jstl/jstl.jsp"/>--%>
+    <h3>c:url</h3> <br>
+    <c:url value="jstl.jsp" var="testurl">
+        <c:param name="name" value="李小牛"/>
+    </c:url>
+    url:${testurl}
 </body>
 </html>

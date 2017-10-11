@@ -33,15 +33,15 @@ public class Customer {
     }
 
     public String getName() {
-        return name == null ? "": "%"+name+"%";
+        return name;
     }
 
     public String getAddress() {
-        return address == null ? "": "%"+address+"%";
+        return address;
     }
 
     public String getPhone() {
-        return phone == null ? "": "%"+phone+"%";
+        return phone;
     }
 
     public void setName(String name) {

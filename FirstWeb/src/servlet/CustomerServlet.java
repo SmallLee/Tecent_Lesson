@@ -41,7 +41,7 @@ public class CustomerServlet extends HttpServlet {
         if (count > 0 ) {
             req.setAttribute("msg","用户名"+name+"已经存在，请重新选择!");
             System.out.println(req.getAttribute("msg"));
-            req.getRequestDispatcher("/customer/add.jsp").forward(req,resp);
+            req.getRequestDispatcher("/customer/add1.jsp").forward(req,resp);
         } else {
             Customer customer = new Customer(name,address,phone);
             customerDao.save(customer);
@@ -71,7 +71,7 @@ public class CustomerServlet extends HttpServlet {
             int id = Integer.parseInt(idStr);
             if (!oldName.equalsIgnoreCase(name) && count > 0) {//数据库中有相同的记录
                 req.setAttribute("msg","The name "+name+" is already exists,please select another!");
-                req.getRequestDispatcher("/customer/update.jsp").forward(req,resp);
+                req.getRequestDispatcher("/customer/update1.jsp").forward(req,resp);
                 return;
             }
             Customer customer = new Customer(id,name,address,phone);
@@ -90,7 +90,7 @@ public class CustomerServlet extends HttpServlet {
         CriteriaCustomer cc = new CriteriaCustomer(name,address,phone);
         List<Customer> customerList = customerDao.getCustomerByCriteria(cc);
         req.setAttribute("customerList",customerList);
-        req.getRequestDispatcher("/customer/index.jsp").forward(req,resp);
+        req.getRequestDispatcher("/customer/index1.jsp").forward(req,resp);
     }
     private void edit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        String forwardpath = "/customer/error.jsp";
