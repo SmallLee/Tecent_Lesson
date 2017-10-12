@@ -25,4 +25,18 @@
         <error-code>500</error-code>
         <location>/WEB-INF/error.jsp</location>
     </error-page>
+    <!--配饰Filter-->
+        <filter>
+            <filter-name>HelloFilter</filter-name>
+            <filter-class>filter.HelloFilter</filter-class>
+        </filter>
+        <filter-mapping>
+            <filter-name>HelloFilter</filter-name>
+            <url-pattern>/filter/test.jsp</url-pattern>
+            <dispatcher>FORWARD</dispatcher>
+        </filter-mapping>
+        <error-page>
+            <exception-type>java.lang.ArithmeticException</exception-type>
+            <location>/filter/test.jsp</location>
+        </error-page>
 </web-app>

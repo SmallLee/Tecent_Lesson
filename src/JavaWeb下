@@ -41,3 +41,44 @@
 
     数据库删除语句：delete from customer where name = 'xxx';
     模糊查询：select * from customer where name like '%%';(查询所有的)
+
+  Filter
+        拦截请求和响应
+        需要在web.zml中配置和映射
+  如何实现Filter
+    当前类实现Filter接口，重写三个方法
+    init
+    doFilter
+    destroy
+    FilterChain Filter链，多个Filter构成一个Filter链
+        doFilter:把当前请求传给下一个Filter,若当前Filter是最后一个，把请求给目标Servlet(JSP)
+        多个Filter的拦截顺序和Filter在web.xml中<filter-mapping的>配置顺序有关
+
+    多个Filter的代码执行顺序：
+        假如有两个Filter,(A filter的filter-mapping配置在B的前面)目标页面是test.jsp,则代码的执行顺序是
+        1，3，5，4，2
+        A:
+            System.out.println("before A filter");//1
+            chain.doFilter
+            System.out.println("before A filter");//2
+         B:
+             System.out.println("before B filter");//3
+             chain.doFilter
+             System.out.println("before B filter");//4
+
+             test.jsp//5
+
+      dispatcher节点，指定过滤器所拦截的资源被Servlet容器调用的方式，有REQUEST,FORWARD,INCLUDE,ERROR
+         <filter-mapping>
+                    <filter-name>HelloFilter</filter-name>
+                    <url-pattern>/filter/test.jsp</url-pattern>
+                    <dispatcher>FORWARD</dispatcher>
+                </filter-mapping>
+        指定错误处理的两种方式
+            a:errorPage指定
+            <%@ page contentType="text/html;charset=UTF-8" language="java" errorPage="test.jsp" %>
+            b:在web.xml里配置
+                     <error-page>
+                        <exception-type>java.lang.ArithmeticException</exception-type>
+                        <location>/filter/test.jsp</location>
+                    </error-page>
