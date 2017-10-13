@@ -3,6 +3,26 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    <context-param>
+        <param-name>encoding</param-name>
+        <param-value>UTF-8</param-value>
+    </context-param>
+    <!--sessionKey-->
+    <context-param>
+        <param-name>userSessionKey</param-name>
+        <param-value>username</param-value>
+    </context-param>
+    <!--重定向的页面-->
+    <context-param>
+        <param-name>redirectUrl</param-name>
+        <param-value>/filterlogin/login.jsp</param-value>
+    </context-param>
+    <!--不需要过滤的url-->
+    <context-param>
+        <param-name>unFilteredUrls</param-name>
+        <param-value>/filterlogin/list.jsp,/filterlogin/a.jsp,/filterlogin/login.jsp,/filterlogin/doLogin.jsp
+        </param-value>
+    </context-param>
     <!--配置和映射Servlet-->
     <servlet>
         <servlet-name>HelloServlet</servlet-name>

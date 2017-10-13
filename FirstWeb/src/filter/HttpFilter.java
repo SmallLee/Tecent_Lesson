@@ -25,7 +25,7 @@ public abstract class HttpFilter implements Filter {
         doFilter(request,response,filterChain);
     }
 
-    protected abstract void doFilter(HttpServletRequest request,HttpServletResponse response,FilterChain chain);
+    protected abstract void doFilter(HttpServletRequest request,HttpServletResponse response,FilterChain chain) throws IOException, ServletException;
 
     @Override
     public void destroy() {}
