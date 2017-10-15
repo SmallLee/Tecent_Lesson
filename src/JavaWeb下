@@ -87,3 +87,8 @@
             response.setDateHeader("Expires",-1);
             response.setHeader("Cache-Contrl","no-cache");
             response.setHeader("Pragma","no-cache");
+5.js中不能使用JSP的隐含对象进行输出
+    例如下面的代码是无法向页面输出abcd的
+         <script>
+             <%out.print("dsfds");%>
+         </script>

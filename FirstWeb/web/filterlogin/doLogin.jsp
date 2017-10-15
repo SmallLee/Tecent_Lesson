@@ -17,7 +17,7 @@
             if ("lxn".equals(username)){
                 //存放到session中
                 session.setAttribute(application.getInitParameter("userSessionKey"),username);
-                response.sendRedirect("/filterlogin/list.jsp");
+                response.sendRedirect("list.jsp");
             }else{
                 request.setAttribute("msg","用户名"+username+"不正确");
                 request.getRequestDispatcher(request.getContextPath()+"/filterlogin/login.jsp").forward(request,response);

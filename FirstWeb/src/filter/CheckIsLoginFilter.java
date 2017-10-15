@@ -35,11 +35,12 @@ public class CheckIsLoginFilter extends HttpFilter {
 
         //检查servletPath是否为不需要过滤的url
         if (unFilteredUrls.contains(servletPath)) {
+            System.out.println("dofilter");
             chain.doFilter(request,response);
             return;
         }
         //重定向的页面
-        String username = (String) request.getSession().getAttribute("username");
+        Object username = request.getSession().getAttribute(sessionKey);
         System.out.println("username: "+username);
         if (username == null) {
             response.sendRedirect(request.getContextPath() + redirectUrl);

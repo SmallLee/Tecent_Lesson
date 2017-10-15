@@ -1,4 +1,4 @@
-<%--
+<%@ page import="javax.swing.text.Document" %><%--
   Created by IntelliJ IDEA.
   User: zxy
   Date: 2017/10/13
@@ -14,9 +14,13 @@
         $(function () {
             $("#btn_logouot").click(function () {
                 location.href = "/filterlogin/login.jsp";
-                <% session.setAttribute(application.getInitParameter("userSessionKey"),null);%>
+                document.write("sdf")
+                <%
+                System.out.println("===zhixingle");
+                session.setAttribute(application.getInitParameter("userSessionKey"),null);%>
             });
         });
+        <%out.print("dsfds");%>
     </script>
 </head>
 <body>
