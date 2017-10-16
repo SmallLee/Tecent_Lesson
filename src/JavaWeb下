@@ -92,3 +92,18 @@
          <script>
              <%out.print("dsfds");%>
          </script>
+<form action="/authority?method=getAuthorities" method="post">
+        Name: <input type="text" name="username">
+        <input type="submit">
+    </form>
+
+   a:如果要获取action后拼接的参数，表单提交是的请求方法必须为post,否则无法获取到action中拼接的参数
+   b:当action和表单域中有相同的参数名时，如果请求方式为get，那么获取的参数值是表单域中的
+   如果请求方式为post，那么获取的参数是action中的
+   c:在action中拼接参数，可以在对应的Servlet中通过request.getParameter()获取请求参数的值
+   d:jstl中的运算符
+        算术运算符 + 、 - 、 * 、 / （或 div ）和 % （或 mod ）
+        关系运算符 == （或 eq ）、 != （或 ne ）、 < （或 lt ）、 > （或 gt ）、 <= （或 le ）和 >= （或 ge ）
+        逻辑运算符 && （或 and ）、 || （或 or ）和 ! （或 not ）
+        验证运算符 empty
+
