@@ -107,3 +107,14 @@
         逻辑运算符 && （或 and ）、 || （或 or ）和 ! （或 not ）
         验证运算符 empty　
 
+    表单action中路径写法
+        <form action="<%=request.getContextPath()%>/authLoginServlet?method=login" method="post">
+              Name:   <input type="text" name="username"><br>
+             <input type="submit">
+        </form>
+    报错
+        Cannot call sendRedirect() after the response has been committed
+        出这个错的原因是在重定向后调用了chain.doFilter方法
+
+    List的contains方法可以用来判断集合中是否包含某个对象，判断的依据是对象的equals的返回值，所以我们可以重写对象
+    的equals方法，来定比比较规则

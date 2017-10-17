@@ -37,13 +37,13 @@ public class AuthorityServlet extends HttpServlet {
         User user = UserDao.get(username);
         request.setAttribute("user",user);
         request.setAttribute("authorities",UserDao.getAuthorities());
-        request.getRequestDispatcher("/authority/authority-manager.jsp").forward(request,response);
+        request.getRequestDispatcher("/authfilter/authority-manager.jsp").forward(request,response);
     }
     public void updateAuthority(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String[] authorities = request.getParameterValues("cbauth");
         List<Authority> authorityList = UserDao.getAuthorities(authorities);
         UserDao.update(username,authorityList);
-        request.getRequestDispatcher("/authority/authority-manager.jsp").forward(request,response);
+        request.getRequestDispatcher("/authfilter/authority-manager.jsp").forward(request,response);
     }
 }

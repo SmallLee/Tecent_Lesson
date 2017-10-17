@@ -10,10 +10,10 @@ public class UserDao {
     static {
         users = new HashMap<String,User>();
         authorities = new ArrayList<Authority>();
-        authorities.add(new Authority("Article-1","article-1.jsp"));
-        authorities.add(new Authority("Article-2","article-2.jsp"));
-        authorities.add(new Authority("Article-3","article-3.jsp"));
-        authorities.add(new Authority("Article-4","article-4.jsp"));
+        authorities.add(new Authority("Article-1","/authfilter/article-1.jsp"));
+        authorities.add(new Authority("Article-2","/authfilter/article-2.jsp"));
+        authorities.add(new Authority("Article-3","/authfilter/article-3.jsp"));
+        authorities.add(new Authority("Article-4","/authfilter/article-4.jsp"));
         User user1 = new User("AAA",authorities.subList(0,2));
         users.put("AAA",user1);
 
