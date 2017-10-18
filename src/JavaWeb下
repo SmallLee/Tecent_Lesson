@@ -118,3 +118,33 @@
 
     List的contains方法可以用来判断集合中是否包含某个对象，判断的依据是对象的equals的返回值，所以我们可以重写对象
     的equals方法，来定比比较规则
+
+    6.HttpServletRequest在Tomcat中的实现为
+    org.apache.catalina.connector.RequestFacade
+
+    HttpServletRequestWrapper.对HttpServletRequest的方法进行了增强
+
+    7.文件上传和下载
+        采用post请求方式，参数放在Form Data中,此时请求体为
+        Form Data:
+        file:文件名
+
+        当把enctype改为 enctype="multipart/form-data"时，此时请求体为
+        Request Payload:
+        ------WebKitFormBoundaryoTNkWnK0JBXfXZ8F
+        Content-Disposition: form-data; name="file"; filename="QQ图片20171017164804.jpg"
+        Content-Type: image/jpeg
+
+
+        ------WebKitFormBoundaryoTNkWnK0JBXfXZ8F--
+
+        表单需要上传文件时，请求方式必须为post，envtype指定为multipart/form-data，默认值是
+        application/x-www-form-urlencoded,
+        enctype指定数据发送到服务器时浏览器使用的编码类型：
+         application/x-www-form-urlencoded：默认值，使用有限的字符集，当使用了非字母和数字时，
+         必须用%HH(H代表16进制数字)，对于大容量的二进制数字或包含非ASCII字符的文本来说，这种编码不能
+         满足要求。
+         multipart/form-data：表示表单以二进制传输数据
+
+         当表单的envtype改变时，不能再使用request.getParameter获取请求参数，此时以二进制的请求方式提交请求信息
+
