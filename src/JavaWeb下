@@ -147,4 +147,8 @@
          multipart/form-data：表示表单以二进制传输数据
 
          当表单的envtype改变时，不能再使用request.getParameter获取请求参数，此时以二进制的请求方式提交请求信息
+        文本文件：
 
+        7.表单中的button按钮默认情况下会自动提交表单，也就是默认的type类型是submit,为了防止点击按钮后
+        自动提交表单，应该为button指定type属性
+         <button class="addFile" type="button">新增一个组件</button>
