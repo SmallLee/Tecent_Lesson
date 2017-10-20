@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.List;
+import java.util.Properties;
 
 @WebServlet(name = "UploadServlet",urlPatterns = "/uploadServlet")
 public class UploadServlet extends HttpServlet {
@@ -23,6 +24,11 @@ public class UploadServlet extends HttpServlet {
 //        String file = req.getParameter("file");
 //        System.out.println(desc);
 //        System.out.println(file);
+        Properties prop = new Properties();
+        InputStream is = new FileInputStream("D:\\JavaProject\\Tecent_Lesson\\FirstWeb\\src\\fileupload\\upload.properties");
+        prop.load(is);
+        String extension = prop.getProperty("extension");
+        System.out.println("extension: "+extension);
         req.setCharacterEncoding("UTF-8");
         //1.得到FileItem集合
         DiskFileItemFactory factory = new DiskFileItemFactory();

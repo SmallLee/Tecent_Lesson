@@ -16,28 +16,48 @@
         var count = 2;
         $(function () {
             $(".addFile").click(function () {
-                $("#br").before(" File"+
-                    count+": <input type='file' name='file+" +
-                    count +"+'/><br>Desc"+
-                    count+": <input type='text' name='desc" +
-                    count+" '/><input type='submit' value='上传'>" +
-                    " <button class='addFile+"+count+"' type='button'>Add</button>\n" +
-                    "        <button class='deleteFile+"+count+"' type='button'>Delete</button><br><br>");
-                count ++;
+                $("#last").before("   <tr class='file'>\n" +
+                    "            <td>File"+count+":</td><td> <input type=\"file\" name='file"+count+"'></td>\n" +
+                    "        </tr>\n" +
+                    "        <tr class='desc'>\n" +
+                    "            <td> Desc"+count+":</td>\n" +
+                    "            <td><input type=\"text\" name='desc"+count+"'>" +
+                    "<button type='button' id='delete"+count+"'>删除</button></td></tr>");
+                count++;
+                $("#delete"+(count-1)).click(function () {
+                   var tr = $(this).parent().parent();
+                    tr.prev("tr").remove();
+                    tr.remove();
+                    //对索引进行重排序
+                    $(".file").each(function (index) {
+                        $(this).find("td:first").text("File"+(index+1));
+                        $(this).find("td:last input").attr("name","file"+(index+1));
+                    });
+                    $(".desc").each(function (index) {
+                        $(this).find("td:first").text("Desc"+(index+1));
+                        $(this).find("td:last input").attr("name","desc"+(index+1));
+                    });
+                });
             });
         });
     </script>
 </head>
 <body>
-<form action="/uploadServlet" method="post" enctype="multipart/form-data">
-    <span id="part">
-    File1: <input type="file" name="file"><br>
-    Desc1: <input type="text" name="desc">
-    <input type="submit" value="上传">
-    <button class="addFile" type="button">Add</button>
-        <button class="deleteFile">Delete</button><br><br>
-    <br id="br">
-    </span>
+<form action="<%=request.getContextPath()%>/uploadServlet" method="post" enctype="multipart/form-data">
+    <table>
+        <tr class="file">
+            <td>File1:</td>
+            <td> <input type="file" name="file"></td>
+        </tr>
+        <tr class="desc">
+            <td> Desc1:</td>
+            <td><input type="text" name="desc"></td>
+        </tr>
+        <tr id="last">
+            <td> <input type="submit" value="上传"></td>
+            <td><button class="addFile" type="button">增加一个新的</button></td>
+        </tr>
+    </table>
 </form>
 </body>
 </html>
