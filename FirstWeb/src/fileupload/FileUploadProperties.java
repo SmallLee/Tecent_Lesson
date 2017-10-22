@@ -8,16 +8,16 @@ import java.util.Map;
 public class FileUploadProperties {
     private Map<String,String> properties = new HashMap<String,String>();
     private FileUploadProperties(){};
-    public FileUploadProperties(String name){
+    private FileUploadProperties(String name){
 
     };
 
     //静态内部类实现单例
     private static class FileUploadHolder{
-       private static final FileUploadProperties INSTANCE = new FileUploadProperties();
+       private static FileUploadProperties INSTANCE = new FileUploadProperties();
     }
 
-    public static final FileUploadProperties getInstance(){
+    public static  FileUploadProperties getInstance(){
         return FileUploadHolder.INSTANCE;
     }
 

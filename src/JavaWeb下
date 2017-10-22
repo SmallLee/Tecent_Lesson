@@ -152,3 +152,18 @@
         7.表单中的button按钮默认情况下会自动提交表单，也就是默认的type类型是submit,为了防止点击按钮后
         自动提交表单，应该为button指定type属性
          <button class="addFile" type="button">新增一个组件</button>
+
+         8.让一个类不能继承，有两种方式
+            a:定义为final
+            b:仅提供一个构造函数并且私有化
+
+         9.getClass().getResourceAsStream和getClass().getClassLoader().getResourceAsStream的区别
+         绝对路径：以/开头
+         相对路径：不以/开头
+         getClass().getResourceAsStream可以接受绝对路径和相对路径
+         getClass().getClassLoader().getResourceAsStream:路径相对于classpath的绝对路径
+
+         10.contextInitialized是当web应用部署到web容器上的时候调用的，servlet的init先执行，
+
+
+

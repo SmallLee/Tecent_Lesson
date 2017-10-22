@@ -19,17 +19,27 @@ import java.util.Properties;
 @WebServlet(name = "UploadServlet",urlPatterns = "/uploadServlet")
 public class UploadServlet extends HttpServlet {
     @Override
+    public void init() throws ServletException {
+        super.init();
+        System.out.println("upload init");
+    }
+
+    @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String desc = req.getParameter("desc");
+        //当表单的enctype改变以后，不能使用下面的方式获取请求参数了
+        //        String desc = req.getParameter("desc");
 //        String file = req.getParameter("file");
 //        System.out.println(desc);
 //        System.out.println(file);
-        Properties prop = new Properties();
-        InputStream is = new FileInputStream("D:\\JavaProject\\Tecent_Lesson\\FirstWeb\\src\\fileupload\\upload.properties");
-        prop.load(is);
-        String extension = prop.getProperty("extension");
-        System.out.println("extension: "+extension);
-        req.setCharacterEncoding("UTF-8");
+//        InputStream s1 = getClass().getResourceAsStream("upload.properties");
+//        InputStream s2 = getClass().getResourceAsStream("/fileupload/upload.properties");
+//        System.out.println(s1+"----"+s2);
+        String extension = FileUploadProperties.getInstance().getProperty("extension");
+        String fileMaxSize = FileUploadProperties.getInstance().getProperty("fileMaxSize");
+        String totalFileSize = FileUploadProperties.getInstance().getProperty("totalFileSize");
+        System.out.println(extension+"--"+fileMaxSize+"--"+totalFileSize);
+
+
         //1.得到FileItem集合
         DiskFileItemFactory factory = new DiskFileItemFactory();
         //500k，临界值，超出这个临界值文件会被保存在临时目录中
