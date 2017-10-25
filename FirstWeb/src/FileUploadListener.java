@@ -12,7 +12,7 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.Properties;
 
-@WebListener()
+@WebListener("在web应用部署到服务器的时候，获取文件上传配置的属性")
 public class FileUploadListener implements ServletContextListener,
         HttpSessionListener, HttpSessionAttributeListener {
 

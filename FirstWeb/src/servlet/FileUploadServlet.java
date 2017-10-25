@@ -1,23 +1,25 @@
-package fileupload;
+package servlet;
 
-import com.sun.prism.shader.FillEllipse_Color_AlphaTest_Loader;
+import fileupload.FileUploadBean;
+import fileupload.FileUploadProperties;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import javax.print.attribute.standard.RequestingUserName;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Properties;
+import java.util.Map;
 
-@WebServlet(name = "UploadServlet",urlPatterns = "/uploadServlet")
-public class UploadServlet extends HttpServlet {
+@WebServlet(name = "FileUploadServlet",urlPatterns = "/fileupload")
+public class FileUploadServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
@@ -30,43 +32,58 @@ public class UploadServlet extends HttpServlet {
 
         List<FileItem> fileItems = null;
         try {
+            Map<String,FileItem> uploadFiles = new HashMap<String,FileItem>();
             //解析请求，得到FileItem对象
             fileItems  = fileUpload.parseRequest(req);
+                //1.构建FileUploadBean,填充uploadFiles
+            List<FileUploadBean> beanList = buildFileUploadBeans(fileItems,uploadFiles);
+            for (FileUploadBean bean : beanList) {
+                System.out.println(bean.getFileName()+"---"+bean.getFileDesc());
+            }
+                //2.检验扩展名
+            validateExtension();
+                //3.校验文件大小
+                //4.上传
+            upload(uploadFiles);
+                //5.保存到数据库
+            saveBeans(beanList);
         } catch (FileUploadException e) {
             e.printStackTrace();
         }
-        //2.遍历items
-        if (fileItems != null && fileItems.size() >  0) {
-            for (FileItem fileItem : fileItems) {
-                //表单域
-                if (fileItem.isFormField()) {
-                    //表单域名称
-                    String name = fileItem.getFieldName();
-                    //表单域值
-                    String string = fileItem.getString();
-                    System.out.println(name+"----"+string);
-                } else {
-                    //文件
-                    String fieldName = fileItem.getFieldName();
-                    String filename = fileItem.getName();
-                    String contentType = fileItem.getContentType();
-                    //文件大小，字节
-                    long size = fileItem.getSize();
-                    System.out.println(fieldName+"---"+filename+"---"+contentType+"---"+size);
-                    InputStream in = fileItem.getInputStream();
-                    byte[] buffer = new byte[1024];
-                    int len;
-                    filename = "c:\\files\\"+filename;
-                    System.out.println(filename);
-                    OutputStream out = new FileOutputStream(filename);
-                    while ((len = in.read(buffer)) != -1) {
-                        out.write(buffer,0,len);
-                    }
-                    in.close();
-                    out.close();
-                }
+    }
+
+    private void saveBeans(List<FileUploadBean> beanList) {
+    }
+
+    private void upload(Map<String, FileItem> uploadFiles) {
+    }
+
+    private void validateExtension() {
+    }
+
+    private List<FileUploadBean> buildFileUploadBeans(List<FileItem> fileItems, Map<String, FileItem> uploadFiles) {
+        List<FileUploadBean> beanList = new ArrayList<FileUploadBean>();
+        Map<String,String> descs = new HashMap<String,String>();
+        for (FileItem item : fileItems) {
+            if (item.isFormField()) {
+                descs.put(item.getFieldName(),item.getString());
             }
         }
+        for (FileItem item : fileItems) {
+            if (!item.isFormField()) {
+                String filedName = item.getFieldName();
+                String index = filedName.substring(filedName.length() - 1);
+                String fileName = item.getName();
+                String desc = descs.get("desc" + index);
+                String filePath = getFilePath();
+                FileUploadBean fileUploadBean = new FileUploadBean(fileName,filePath,desc);
+            }
+        }
+        return beanList;
+    }
+
+    private String getFilePath() {
+        return "";
     }
 
     private ServletFileUpload getServletFileUpload() {

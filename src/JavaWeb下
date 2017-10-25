@@ -163,7 +163,9 @@
          getClass().getResourceAsStream可以接受绝对路径和相对路径
          getClass().getClassLoader().getResourceAsStream:路径相对于classpath的绝对路径
 
-         10.contextInitialized是当web应用部署到web容器上的时候调用的，servlet的init先执行，
+         10.contextInitialized是当web应用部署到web容器上的时候调用的，比servlet的init先执行，
+         Listener的注解@WebListener的值是对Listener的描述，参数可选
 
-
-
+         11.如何将表单中的两个域封装成一个javaBean，比如一个是表单域，一个是文件域
+            a:先获取判断如果是表单域，然后将需要的信息存到一个集合中
+            b:在另一个文件域中从集合中获取对应的信息，赋值给bean

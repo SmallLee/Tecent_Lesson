@@ -2,8 +2,6 @@ package authority;
 
 public class Authority {
     private String displayName;
-
-
     private String url;
 
     public String getUrl() {
