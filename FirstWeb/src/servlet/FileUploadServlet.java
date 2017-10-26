@@ -7,19 +7,19 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @WebServlet(name = "FileUploadServlet",urlPatterns = "/fileupload")
 public class FileUploadServlet extends HttpServlet {
+    public static final String FILE_PATH = "/WEB-INF/files";
     @Override
     public void init() throws ServletException {
         super.init();
@@ -32,6 +32,7 @@ public class FileUploadServlet extends HttpServlet {
 
         List<FileItem> fileItems = null;
         try {
+            //文件路径和对应的FileItem对象
             Map<String,FileItem> uploadFiles = new HashMap<String,FileItem>();
             //解析请求，得到FileItem对象
             fileItems  = fileUpload.parseRequest(req);
@@ -75,15 +76,22 @@ public class FileUploadServlet extends HttpServlet {
                 String index = filedName.substring(filedName.length() - 1);
                 String fileName = item.getName();
                 String desc = descs.get("desc" + index);
-                String filePath = getFilePath();
+                String filePath = getFilePath(fileName);
+                System.out.println("filePath: "+filePath);
                 FileUploadBean fileUploadBean = new FileUploadBean(fileName,filePath,desc);
+                beanList.add(fileUploadBean);
+                uploadFiles.put(filePath,item);
             }
         }
         return beanList;
     }
 
-    private String getFilePath() {
-        return "";
+    private String getFilePath(String filedName) {
+        String ext = filedName.substring(filedName.lastIndexOf("."));
+        Random random = new Random();
+        long randomNumber = random.nextLong();
+        String filePath = getServletContext().getRealPath(FILE_PATH) + "\\" + randomNumber + ext;
+        return filePath;
     }
 
     private ServletFileUpload getServletFileUpload() {
@@ -120,4 +128,6 @@ public class FileUploadServlet extends HttpServlet {
 * file---新建文本文档.txt---text/plain---25185
 * 图片
 * file---QQ图片20171017164804.jpg---image/jpeg---58714
+*
+*
 * */
