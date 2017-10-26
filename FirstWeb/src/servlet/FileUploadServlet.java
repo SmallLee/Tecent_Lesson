@@ -23,7 +23,7 @@ public class FileUploadServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        System.out.println("upload init");
+        System.out.println("upload init"); 
     }
 
     @Override

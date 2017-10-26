@@ -47,11 +47,11 @@
     <table>
         <tr class="file">
             <td>File1:</td>
-            <td> <input type="file" name="file"></td>
+            <td> <input type="file" name="file1"></td>
         </tr>
         <tr class="desc">
             <td> Desc1:</td>
-            <td><input type="text" name="desc"></td>
+            <td><input type="text" name="desc1"></td>
         </tr>
         <tr id="last">
             <td> <input type="submit" value="上传"></td>

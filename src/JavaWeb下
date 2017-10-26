@@ -169,3 +169,6 @@
          11.如何将表单中的两个域封装成一个javaBean，比如一个是表单域，一个是文件域
             a:先获取判断如果是表单域，然后将需要的信息存到一个集合中
             b:在另一个文件域中从集合中获取对应的信息，赋值给bean
+
+         12.getRealPath:
+           //D:\JavaProject\Tecent_Lesson\out\artifacts\FirstWeb_war_exploded\WEB-INF\files\1508985790880.jpg
