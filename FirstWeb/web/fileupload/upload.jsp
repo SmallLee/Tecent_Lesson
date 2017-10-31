@@ -37,6 +37,7 @@
                         $(this).find("td:first").text("Desc"+(index+1));
                         $(this).find("td:last input").attr("name","desc"+(index+1));
                     });
+                    count = count - 1;
                 });
             });
         });

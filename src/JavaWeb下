@@ -161,7 +161,11 @@
          绝对路径：以/开头
          相对路径：不以/开头
          getClass().getResourceAsStream可以接受绝对路径和相对路径
-         getClass().getClassLoader().getResourceAsStream:路径相对于classpath的绝对路径
+         getClass().getClassLoader().getResourceAsStream:路径相对于classpath的绝对路径,
+         也就是路径不能以/开头
+
+          class.getResourceAsStream一般用于从当前类所在的包获取资源，classLoader.getResourceAsStream
+          一般用于从classPath下查找，
 
          10.contextInitialized是当web应用部署到web容器上的时候调用的，比servlet的init先执行，
          Listener的注解@WebListener的值是对Listener的描述，参数可选

@@ -1,5 +1,6 @@
 package servlet;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import fileupload.FileUploadBean;
 import fileupload.FileUploadProperties;
 import org.apache.commons.fileupload.FileItem;
@@ -23,7 +24,18 @@ public class FileUploadServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        System.out.println("upload init"); 
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("fileupload/upload.properties");
+        Properties pro = new Properties();
+        try {
+            pro.load(inputStream);
+            String extension = pro.getProperty("extension");
+            String fileMaxSize = pro.getProperty("fileMaxSize");
+            String totalFileSize = pro.getProperty("totalFileSize");
+            System.out.println(extension+""+fileMaxSize+""+totalFileSize);
+            System.out.println("classloader: "+getClass().getClassLoader().getResource(""));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -38,9 +50,7 @@ public class FileUploadServlet extends HttpServlet {
             fileItems  = fileUpload.parseRequest(req);
                 //1.构建FileUploadBean,填充uploadFiles
             List<FileUploadBean> beanList = buildFileUploadBeans(fileItems,uploadFiles);
-            for (FileUploadBean bean : beanList) {
-                System.out.println(bean.getFileName()+"---"+bean.getFileDesc());
-            }
+
                 //2.检验扩展名
             validateExtension();
                 //3.校验文件大小
@@ -56,12 +66,38 @@ public class FileUploadServlet extends HttpServlet {
     private void saveBeans(List<FileUploadBean> beanList) {
     }
 
-    private void upload(Map<String, FileItem> uploadFiles) {
+    private void upload(Map<String, FileItem> uploadFiles) throws IOException {
+        System.out.println("size： "+uploadFiles.entrySet().size());
+        for (Map.Entry<String,FileItem> uploadFile : uploadFiles.entrySet()) {
+            String filePath = uploadFile.getKey();
+            FileItem fileItem = uploadFile.getValue();
+            beginUpload(filePath,fileItem.getInputStream());
+        }
+    }
+
+    public void beginUpload(String filePath,InputStream inputStream) throws IOException {
+        byte[] buffer = new byte[1024];
+        int len;
+        OutputStream  out = new FileOutputStream(filePath);
+        while((len = inputStream.read(buffer))!= -1) {
+            out.write(buffer,0, len);
+        }
+        inputStream.close();
+        out.close();
+        System.out.println(filePath);
     }
 
     private void validateExtension() {
     }
 
+    /**
+     * 构建FileUploadBean,并填充uploadFiles
+     * FileUploadBean一个文件对应的实体类，包括文件id,name,path
+     * uploadFiles :Map<String,FileItem>,
+     * @param fileItems
+     * @param uploadFiles
+     * @return
+     */
     private List<FileUploadBean> buildFileUploadBeans(List<FileItem> fileItems, Map<String, FileItem> uploadFiles) {
         List<FileUploadBean> beanList = new ArrayList<FileUploadBean>();
         Map<String,String> descs = new HashMap<String,String>();
@@ -86,6 +122,11 @@ public class FileUploadServlet extends HttpServlet {
         return beanList;
     }
 
+    /**
+     * 根据给定的文件名构建一个文件路径
+     * @param filedName
+     * @return
+     */
     private String getFilePath(String filedName) {
         String ext = filedName.substring(filedName.lastIndexOf("."));
         Random random = new Random();
@@ -94,6 +135,11 @@ public class FileUploadServlet extends HttpServlet {
         return filePath;
     }
 
+    /**
+     * 构建ServletFileUpload对象，
+     * 从配置文件中读取了属性，用于约束
+     * @return
+     */
     private ServletFileUpload getServletFileUpload() {
         //当表单的enctype改变以后，不能使用下面的方式获取请求参数了
         //        String desc = req.getParameter("desc");
