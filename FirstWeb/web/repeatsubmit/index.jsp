@@ -14,8 +14,9 @@
 <%
 request.getSession().setAttribute("token",new Date().getTime()+"");
 %>
+<%--将随机token放到表单的隐藏域中提交到servlet--%>
 <form action="/repeat" method="post">
-    <input type="hidden" name ="tokenValue" value="atguigu">
+    <input type="hidden" name ="tokenValue" value="${token}">
     <input type="text" name="username">
     <input type="submit" value="提交">
 </form>

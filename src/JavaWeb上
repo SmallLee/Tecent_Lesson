@@ -40,7 +40,7 @@ service
 关闭时调用servlet的destory方法
 destory:释放servlet占用的资源
 
-6.load-on-startup:制定servlet创建的时机，负数代表第一次请求的时候创建，0或证书代表当前web应用被Servlet容器加载的
+6.load-on-startup:制定servlet创建的时机，负数代表第一次请求的时候创建，0或正数代表当前web应用被Servlet容器加载的
 时候创建，数值越小优先级越高，也就是越早被创建
 
 一个servlet可以对应多个servlet-mapping
@@ -59,6 +59,10 @@ destory:释放servlet占用的资源
     reloadable：如果设置为true，Tomcat服务器在运行时，会监视WEB-INF/classes和WEB-INF/lib目录下类的改变，如果发现有类被更新，
     Tomcat服务器将自动重新加载该Web应用程序。这个特性在应用程序开发阶段非常有用，
     但是它需要额外的运行时开销，所以在产品发布时不建议使用。该属性的默认值是false。
+
+    在conf/server.xml中也可以配置
+    从Tomcat 5开始，不建议直接在server.xml文件中配置<Context>元素，因为server.xml文件作为Tomcat的主要配置文件，一旦Tomcat启动后，
+    将不会再读取这个文件，因此无法在Tomcat服务器启动时发布Web应用程序。如果在其他地方配置<Context>元素，那么在Tomcat运行时，也可以发布Web应用程序。
 9.ServletConfig
     方法 getInitParameterNames
     getServletName获得注册的Servlet的名字
@@ -66,7 +70,7 @@ destory:释放servlet占用的资源
     getServletContext
 
 10.HTTP请求和响应
-   请求结构：请求行，请求头，一个空行，试题内容
+   请求结构：请求行，请求头，一个空行  实体内容
    响应结构：状态行，消息头，一个空行，响应实体
 11.在浏览器地址输入某个url访问或者单击链接访问url，都是get请求，get请求的数据在1k以下
     get请求把表单的字段和数据封装在请求实体中
@@ -103,6 +107,14 @@ destory:释放servlet占用的资源
 不建议重写带参数的init方法，容易报空指针异常
 建议重写init()方法
 
+ public void init(ServletConfig config) throws ServletException {
+        this.config = config;
+        this.init();
+    }
+
+    public void init() throws ServletException {
+    }
+
 15.JSP
 jsp文件可以放置在除了WEB-INF及其子目录之外的任何目录
 
@@ -128,10 +140,16 @@ application:整个应用
 19.请求的转发和重定向
     本质区别：转发是一次请求，重定向是两次
    a:地址栏不一样
-   b:request对象不一样
+   b:request对象不一样，转发是同一个request和response对象，重定向是不同的request和response对象
    c:转发只能转发当前WEB应用的资源，重定向可以定向到任何资源
-   d:转发：/代表当前web应用的根目录
-   重定向：/代表当前web站点的根目录
+   d:转发：/代表当前web应用的根目录 ,localhost:8080/app
+   重定向：/代表当前web站点的根目录,localhost:8080
+
+   获取RequestDispatcher的方法
+   request.getRequestDispatcher(参数可以不以/开头，因为request有相对路径的概念)
+   getServletContext().getRequestDispatcher (参数只能已/开头，也就是绝对路径，)
+    getServletContext().getNamedDispatcher()
+    
  20.JSP页面指令
   page
   include(包含的两个页面的编码要一致，否则会报错)
@@ -153,10 +171,9 @@ charset指定响应的页面的编码，pageEncoding指定当前JSP页面的编�
 22.以斜杠开头，表示web应用的根目录，否则，相对于当前文件
 
 23.动态包含和静态包含的区别
-    静态包含：把被包含页面中除了编译指令之外的代码都包含进来到当前页面的body元素之内，生成一个Servlet文件
+    静态包含：把被包含页面中除了编译指令之外的代码都包含进来到当前页面的body元素之内
     动态包含：通过命令包含
     org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "a.jsp", out, false);
-    生成两个Servlet文件
 23.jsp:forward等同于request.getRequestDispatcher("a.jsp").forward(request,response);
 区别是jsp:forward可以通过jsp:param传递参数(jsp:include也可以传递参数)
 

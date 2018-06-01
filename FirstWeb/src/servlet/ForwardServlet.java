@@ -13,6 +13,8 @@ public class ForwardServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/my");
-        requestDispatcher.forward(req,resp);
+//        requestDispatcher.forward(req,resp);
+        resp.sendRedirect("/session/login.jsp");
+        resp.sendRedirect(req.getContextPath() + "/session/login.jsp");
     }
 }

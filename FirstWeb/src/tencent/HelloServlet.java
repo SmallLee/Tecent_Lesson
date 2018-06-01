@@ -15,9 +15,10 @@ public class HelloServlet implements Servlet {
         String realPath = servletContext.getRealPath("hello.txt");
         //D:\JavaProject\Tecent_Lesson\out\artifacts\FirstWeb_war_exploded\hello.txt
         System.out.println(realPath);
-        String contextPath = servletContext.getContextPath();
+        String contextPath = servletContext.getContextPath(); // 站点的根路径。也就是项目的名字
         System.out.println("contextPath: "+contextPath);
-        InputStream is1 = servletContext.getResourceAsStream("hello.txt");
+        // hello2.txt放在WebRoot路径下
+        InputStream is1 = servletContext.getResourceAsStream("/hello2.txt");
         System.out.println("is1:  "+is1);
         InputStream is2 = getClass().getClassLoader().getResourceAsStream("hello.txt");
         System.out.println("is2 "+is2);//java.io.BufferedInputStream@9eddd2

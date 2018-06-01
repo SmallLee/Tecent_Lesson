@@ -67,10 +67,10 @@
     编写绝对路径可以避免上面的问题
 
     JavaWeb中的/代表什么
-        代表当前Web应用的根路径（/需要交给servlet处理）
+        代表当前Web应用的根路径（/需要交给servlet处理）,也就是localhost:8080/contextPath/
                 a:请求转发
                 b：web.xml中配置的
-        代表当前站点的跟路径(浏览器处理)
+        代表当前站点的跟路径(浏览器处理),localhost:8080
                 a:超链接
                 b:表单中的action
                 c:请求重定向
@@ -92,12 +92,52 @@
         e:比较两个值是否一致，一致，把session中的值清除
         f:不一致，响应重复提交
 
+代码如下：
+<body>
+<%
+request.getSession().setAttribute("token",new Date().getTime()+"");
+%>
+<%--将随机token放到表单的隐藏域中提交到servlet--%>
+<form action="/repeat" method="post">
+    <input type="hidden" name ="tokenValue" value="${token}">
+    <input type="text" name="username">
+    <input type="submit" value="提交">
+</form>
+</body>
+
+Servlet代码
+@WebServlet(name = "RepeatSubmitServlet",urlPatterns = "/repeat")
+public class RepeatSubmitServlet extends HttpServlet {
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        String token = (String) req.getAttribute("token");
+//        System.out.println(token);
+//        String username = req.getParameter("username");
+//        System.out.println(username);
+        req.setCharacterEncoding("utf-8");
+        HttpSession session = req.getSession();
+        Object token = session.getAttribute("token");
+        System.out.println(token);
+        String tokenValue = req.getParameter("tokenValue");
+        System.out.println(tokenValue);
+        if (token != null && tokenValue != null && tokenValue.equals(token)) {
+            session.removeAttribute("token");
+        } else {
+            resp.setContentType("text/html;charset=utf-8");
+            PrintWriter writer = resp.getWriter();
+            byte[] bytes = "重复提交".getBytes("gbk");
+            writer.println(new String(bytes,"utf-8"));
+            System.out.println(new String(bytes,"utf-8"));
+        }
+    }
+}
+
 
     13.超链接点击发送的是get请求
             request.setAttribute和需要结合转发获取数据
 
     14.JSP内置对象out的print和write方法区别
-        a:out.print是JSPWriter的方法，out.write是弗雷Writer的方法
+        a:out.print是JSPWriter的方法，out.write是父类Writer的方法
         b:如果两个方法输入的内容为null时，print方法会输出null，write会报空指针异常
         out.print(1)//输出1，因为prin方法直接将1转化为字符串1
         out.write(1)//看不到输出，write方法是将转化为ASCII码表中的字符，而1-32在对应的字符在页面上显示

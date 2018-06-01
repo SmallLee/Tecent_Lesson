@@ -25,7 +25,7 @@ public class RepeatSubmitServlet extends HttpServlet {
         System.out.println(token);
         String tokenValue = req.getParameter("tokenValue");
         System.out.println(tokenValue);
-        if (token != null && tokenValue.equals("atguigu")) {
+        if (token != null && tokenValue != null && tokenValue.equals(token)) {
             session.removeAttribute("token");
         } else {
             resp.setContentType("text/html;charset=utf-8");

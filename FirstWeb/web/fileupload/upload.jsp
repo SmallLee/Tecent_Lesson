@@ -52,7 +52,9 @@
         </tr>
         <tr class="desc">
             <td> Desc1:</td>
-            <td><input type="text" name="desc1"></td>
+            <td><label>
+                <input type="text" name="desc1">
+            </label></td>
         </tr>
         <tr id="last">
             <td> <input type="submit" value="上传"></td>

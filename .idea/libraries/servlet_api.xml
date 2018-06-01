@@ -14,6 +14,10 @@
       <root url="jar://D:/apache-tomcat-7.0.57-windows-x86/apache-tomcat-7.0.81-src.zip!/apache-tomcat-7.0.81-src/webapps/examples/WEB-INF/classes" />
       <root url="jar://D:/apache-tomcat-7.0.57-windows-x86/apache-tomcat-7.0.81-src.zip!/apache-tomcat-7.0.81-src/webapps/examples/WEB-INF/jsp/applet" />
       <root url="jar://D:/apache-tomcat-7.0.57-windows-x86/apache-tomcat-7.0.81-src.zip!/apache-tomcat-7.0.81-src/webapps/examples/jsp/plugin/applet" />
+      <root url="jar://$PROJECT_DIR$/FirstWeb/web/WEB-INF/lib/servlet-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FirstWeb/web/WEB-INF/lib/servlet-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FirstWeb/web/WEB-INF/lib/servlet-api.jar!/" />
+      <root url="jar://D:/apache-tomcat-7.0.82/lib/servlet-api.jar!/" />
     </SOURCES>
   </library>
 </component>
